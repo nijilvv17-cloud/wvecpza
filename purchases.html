@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Purchases | WORLD VISION ELECTRONICS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* =========================================
+           PURCHASES PAGE
+           Sidebar and main layout remain in style.css
+        ========================================= */
+
+        .purchase-page {
+            width: 100%;
+            max-width: 1600px;
+            min-width: 0;
+            margin: 0 auto;
+        }
+
+        .purchase-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .purchase-heading h1 {
+            margin: 0 0 7px;
+            color: #172b4d;
+            font-size: 27px;
+        }
+
+        .purchase-heading p {
+            margin: 0;
+            color: #778399;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .purchase-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 12px 16px;
+            border: 1px solid #e3e9f2;
+            border-radius: 10px;
+            background: #fff;
+            color: #354563;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .purchase-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .purchase-stat-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 0;
+            padding: 21px;
+            background: #fff;
+            border: 1px solid #e5eaf2;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(20, 39, 75, 0.035);
+        }
+
+        .purchase-stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 49px;
+            height: 49px;
+            flex-shrink: 0;
+            border-radius: 13px;
+            font-size: 19px;
+        }
+
+        .purchase-stat-icon.blue {
+            color: #285ed0;
+            background: #edf3ff;
+        }
+
+        .purchase-stat-icon.green {
+            color: #16804d;
+            background: #e9f8ef;
+        }
+
+        .purchase-stat-icon.orange {
+            color: #c07816;
+            background: #fff4e4;
+        }
+
+        .purchase-stat-info {
+            min-width: 0;
+        }
+
+        .purchase-stat-info span {
+            display: block;
+            margin-bottom: 7px;
+            color: #778399;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .purchase-stat-info strong {
+            display: block;
+            color: #1b2d4b;
+            font-size: 24px;
+            overflow-wrap: anywhere;
+        }
+
+        .purchase-card {
+            min-width: 0;
+            max-width: 100%;
+            margin-bottom: 23px;
+            padding: 23px;
+            background: #fff;
+            border: 1px solid #e5eaf2;
+            border-radius: 15px;
+            box-shadow: 0 4px 16px rgba(20, 39, 75, 0.035);
+        }
+
+        .purchase-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .purchase-card-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 21px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .purchase-card-title {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .purchase-card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 11px;
+            background: #edf3ff;
+            color: #285ed0;
+            font-size: 16px;
+        }
+
+        .purchase-card-title h2 {
+            margin: 0;
+            color: #1b2d4b;
+            font-size: 17px;
+        }
+
+        .purchase-card-subtitle {
+            margin: 5px 0 0;
+            color: #8995a9;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .purchase-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 11px;
+            border-radius: 20px;
+            background: #edf8f2;
+            color: #16804d;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .purchase-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .purchase-field {
+            min-width: 0;
+        }
+
+        .purchase-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .purchase-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: #42516b;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .purchase-field .optional {
+            color: #929caf;
+            font-weight: 400;
+        }
+
+        .purchase-field input,
+        .purchase-field select,
+        .purchase-field textarea {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            min-height: 45px;
+            padding: 11px 12px;
+            border: 1px solid #dce3ed;
+            border-radius: 9px;
+            outline: none;
+            background: #fff;
+            color: #253550;
+            font-family: inherit;
+            font-size: 13px;
+            box-sizing: border-box;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .purchase-field textarea {
+            min-height: 78px;
+            resize: vertical;
+        }
+
+        .purchase-field input:focus,
+        .purchase-field select:focus,
+        .purchase-field textarea:focus {
+            border-color: #4778e8;
+            box-shadow: 0 0 0 3px rgba(71, 120, 232, .10);
+        }
+
+        .purchase-field input::placeholder,
+        .purchase-field textarea::placeholder {
+            color: #a0a9b8;
+        }
+
+        .purchase-required {
+            color: #d43d45;
+        }
+
+        .purchase-product-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 130px 115px;
+            gap: 14px;
+            align-items: end;
+        }
+
+        .purchase-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 43px;
+            padding: 11px 16px;
+            border: 1px solid transparent;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .purchase-btn:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
+        .purchase-btn-primary {
+            background: #285ed0;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(40, 94, 208, .13);
+        }
+
+        .purchase-btn-primary:hover:not(:disabled) {
+            background: #1949b2;
+            transform: translateY(-1px);
+        }
+
+        .purchase-btn-secondary {
+            background: #fff;
+            color: #354762;
+            border-color: #dce3ed;
+        }
+
+        .purchase-btn-secondary:hover:not(:disabled) {
+            background: #f5f7fb;
+        }
+
+        .purchase-btn-success {
+            background: #16834f;
+            color: #fff;
+        }
+
+        .purchase-btn-success:hover:not(:disabled) {
+            background: #106b40;
+        }
+
+        .purchase-btn-danger {
+            background: #fff0f0;
+            color: #c43c43;
+            border-color: #ffe0e0;
+        }
+
+        .purchase-btn-block {
+            width: 100%;
+        }
+
+        .purchase-actions {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 19px;
+        }
+
+        .purchase-table-wrap {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .purchase-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .purchase-table thead th {
+            padding: 13px 12px;
+            background: #f5f7fb;
+            border-bottom: 1px solid #e5eaf2;
+            color: #6b7890;
+            text-align: left;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .45px;
+            text-transform: uppercase;
+        }
+
+        .purchase-table tbody td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #edf0f5;
+            color: #34445e;
+            vertical-align: middle;
+        }
+
+        .purchase-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .purchase-table .text-right {
+            text-align: right;
+        }
+
+        .purchase-table .text-center {
+            text-align: center;
+        }
+
+        .purchase-empty {
+            padding: 32px 12px !important;
+            color: #8a96aa !important;
+            text-align: center;
+            white-space: normal;
+        }
+
+        .purchase-empty i {
+            display: block;
+            margin-bottom: 10px;
+            color: #aab5c7;
+            font-size: 28px;
+        }
+
+        .purchase-empty span {
+            display: block;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .purchase-item-name {
+            min-width: 110px;
+            color: #253550;
+            font-weight: 700;
+            white-space: normal;
+        }
+
+        .purchase-item-code {
+            display: block;
+            margin-top: 4px;
+            color: #929caf;
+            font-size: 10px;
+        }
+
+        .purchase-remove-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: #fff0f0;
+            color: #d13f48;
+            cursor: pointer;
+        }
+
+        .purchase-remove-btn:hover {
+            background: #ffe0e0;
+        }
+
+        .purchase-summary-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .purchase-note-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 14px;
+            border: 1px solid #e0eaff;
+            border-radius: 10px;
+            background: #f3f7ff;
+            color: #546b94;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .purchase-note-box i {
+            margin-top: 3px;
+            color: #3568cc;
+        }
+
+        .purchase-totals {
+            padding: 20px;
+            border: 1px solid #e5eaf2;
+            border-radius: 12px;
+            background: #fbfcfe;
+        }
+
+        .purchase-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+            color: #63718a;
+            font-size: 13px;
+        }
+
+        .purchase-total-row strong {
+            color: #253550;
+            font-size: 13px;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        .purchase-total-row.grand-total {
+            align-items: flex-start;
+            margin: 0;
+            padding-top: 17px;
+            border-top: 1px dashed #dce3ed;
+            color: #253550;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .purchase-total-row.grand-total strong {
+            color: #2158c5;
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        .purchase-hint {
+            margin-top: 14px;
+            color: #8995a9;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .purchase-search {
+            width: 100%;
+            max-width: 330px;
+        }
+
+        .purchase-search input {
+            width: 100%;
+            min-width: 0;
+            min-height: 42px;
+            padding: 10px 13px;
+            border: 1px solid #dce3ed;
+            border-radius: 9px;
+            outline: none;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .purchase-search input:focus {
+            border-color: #4778e8;
+        }
+
+        .purchase-footer {
+            padding: 24px 0 10px;
+            color: #8995a9;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @media (max-width: 1150px) {
+            .purchase-stat-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .purchase-product-grid {
+                grid-template-columns: minmax(0, 1fr) 120px;
+            }
+
+            .purchase-product-grid .purchase-add-field {
+                grid-column: 1 / -1;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .purchase-summary-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 760px) {
+            .purchase-heading h1 {
+                font-size: 22px;
+            }
+
+            .purchase-stat-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 12px;
+            }
+
+            .purchase-card {
+                padding: 16px;
+                border-radius: 12px;
+            }
+
+            .purchase-form-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 14px;
+            }
+
+            .purchase-field.full-width {
+                grid-column: auto;
+            }
+
+            .purchase-product-grid {
+                grid-template-columns: minmax(0, 1fr) 95px;
+                gap: 12px;
+            }
+
+            .purchase-product-grid .purchase-add-field {
+                grid-column: 1 / -1;
+            }
+
+            .purchase-actions {
+                flex-direction: column;
+            }
+
+            .purchase-actions .purchase-btn {
+                width: 100%;
+            }
+
+            .purchase-total-row.grand-total strong {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .purchase-heading h1 {
+                font-size: 20px;
+            }
+
+            .purchase-product-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .purchase-product-grid .purchase-add-field {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         SHARED SIDEBAR
+         Same navigation structure on every page
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                <img src="logo.png"
+                     alt="WORLD VISION ELECTRONICS Logo">
+            </div>
+
+            <div class="brand-text">
+                <h2>WORLD VISION</h2>
+                <span>ELECTRONICS</span>
+                <small>Shop Management System</small>
+            </div>
+        </div>
+
+        <div class="location">
+            <i class=""></i>
+            Cherupuzha, Kannur, Kerala
+        </div>
+
+        <p class="nav-heading">MAIN MENU</p>
+
+        <nav class="main-navigation">
+
+            <a href="index.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-house"></i>
+                </span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="products.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </span>
+                <span>Products & Inventory</span>
+            </a>
+
+            <a href="billing.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </span>
+                <span>Billing</span>
+            </a>
+
+            <a href="purchases.html"
+               class="nav-link active"
+               aria-current="page">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-cart-flatbed"></i>
+                </span>
+                <span>Purchases</span>
+            </a>
+
+            <a href="customers.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-users"></i>
+                </span>
+                <span>Customers</span>
+            </a>
+
+            <a href="suppliers.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-truck-field"></i>
+                </span>
+                <span>Suppliers</span>
+            </a>
+
+            <a href="sales.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </span>
+                <span>Sales Register</span>
+            </a>
+             <a href="expenses.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Expenses</span>
+            </a>
+            <a href="reports.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </span>
+                <span>Reports</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-gear"></i>
+                </span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-icon">
+                <i class="fa-solid fa-store"></i>
+            </div>
+
+            <div>
+                <strong>WORLD VISION</strong>
+                <small>Electronics Store</small>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+         Positioning is controlled by style.css
+    ========================================== -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div class="page-heading">
+                <p class="eyebrow">STORE MANAGEMENT</p>
+                <h1>Purchases</h1>
+                <p class="page-subtitle">
+                </p>
+            </div>
+
+           <div class="topbar-right">
+                <div class="topbar-date">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span id="current-date">Loading date...</span>
+                </div>
+
+                <div class="user-avatar">
+    <img src="mylogo.png" alt="WORLD VISION ELECTRONICS">
+</div>
+        </header>
+
+
+            <!-- PURCHASE SUMMARY CARDS -->
+
+            <section class="purchase-stat-grid">
+
+                <div class="purchase-stat-card">
+                    <div class="purchase-stat-icon blue">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+
+                    <div class="purchase-stat-info">
+                        <span>Total Purchase Records</span>
+                        <strong id="total-purchases">0</strong>
+                    </div>
+                </div>
+
+                <div class="purchase-stat-card">
+                    <div class="purchase-stat-icon green">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                    </div>
+
+                    <div class="purchase-stat-info">
+                        <span>Total Purchase Value</span>
+                        <strong id="total-purchase-value">₹0.00</strong>
+                    </div>
+                </div>
+
+                <div class="purchase-stat-card">
+                    <div class="purchase-stat-icon orange">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+
+                    <div class="purchase-stat-info">
+                        <span>Units Purchased</span>
+                        <strong id="total-units-purchased">0</strong>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- SUPPLIER AND PURCHASE DETAILS -->
+
+            <section class="purchase-card">
+
+                <div class="purchase-card-heading">
+                    <div class="purchase-card-title">
+                        <div class="purchase-card-icon">
+                            <i class="fa-solid fa-truck-field"></i>
+                        </div>
+
+                        <div>
+                            <h2>Purchase Information</h2>
+                            <p class="purchase-card-subtitle">
+                                Enter the supplier and purchase invoice details.
+                            </p>
+                        </div>
+                    </div>
+
+                    <span class="purchase-status">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Stock Inward
+                    </span>
+                </div>
+
+                <form id="purchase-form" autocomplete="off">
+
+                    <input type="hidden"
+                           id="purchase-id"
+                           name="purchaseId">
+
+                    <div class="purchase-form-grid">
+
+                        <div class="purchase-field">
+                            <label for="purchase-supplier">
+                                Supplier
+                                <span class="purchase-required">*</span>
+                            </label>
+
+                            <select id="purchase-supplier"
+                                    name="supplierId"
+                                    required>
+                                <option value="">Select a supplier</option>
+                            </select>
+                        </div>
+
+                        <div class="purchase-field">
+                            <label for="purchase-date">
+                                Purchase Date
+                                <span class="purchase-required">*</span>
+                            </label>
+
+                            <input type="date"
+                                   id="purchase-date"
+                                   name="purchaseDate"
+                                   required>
+                        </div>
+
+                        <div class="purchase-field">
+                            <label for="purchase-invoice">
+                                Supplier Invoice Number
+                                <span class="optional">(optional)</span>
+                            </label>
+
+                            <input type="text"
+                                   id="purchase-invoice"
+                                   name="supplierInvoice"
+                                   placeholder="Enter supplier invoice number">
+                        </div>
+
+                        <div class="purchase-field">
+                            <label for="purchase-payment">
+                                Payment Status
+                            </label>
+
+                            <select id="purchase-payment"
+                                    name="paymentStatus">
+                                <option value="Paid">Paid</option>
+                                <option value="Partial">Partially Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                            </select>
+                        </div>
+
+                        <div class="purchase-field">
+                            <label for="purchase-payment-method">
+                                Payment Method
+                            </label>
+
+                            <select id="purchase-payment-method"
+                                    name="paymentMethod">
+                                <option value="Cash">Cash</option>
+                                <option value="UPI">UPI</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                <option value="Card">Card</option>
+                                <option value="Credit">Credit</option>
+                            </select>
+                        </div>
+
+                        <div class="purchase-field">
+                            <label for="purchase-reference">
+                                Reference Number
+                                <span class="optional">(optional)</span>
+                            </label>
+
+                            <input type="text"
+                                   id="purchase-reference"
+                                   name="referenceNumber"
+                                   placeholder="Payment or order reference">
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- ADD PRODUCTS TO PURCHASE -->
+
+            <section class="purchase-card">
+
+                <div class="purchase-card-heading">
+                    <div class="purchase-card-title">
+                        <div class="purchase-card-icon">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+
+                        <div>
+                            <h2>Add Purchased Products</h2>
+                            <p class="purchase-card-subtitle">
+                                Select an inventory product and enter the incoming quantity.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="purchase-item-form" autocomplete="off">
+
+                    <div class="purchase-product-grid">
+
+                       <div class="purchase-field">
+    <label for="purchase-product">
+        Product
+        <span class="purchase-required">*</span>
+    </label>
+
+    <input
+        type="text"
+        id="purchase-product"
+        name="productName"
+        placeholder="Type product name..."
+        autocomplete="off"
+        required
+    >
+</div>
+
+                        <div class="purchase-field">
+                            <label for="purchase-quantity">
+                                Quantity
+                                <span class="purchase-required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="purchase-quantity"
+                                   name="quantity"
+                                   min="0.001"
+                                   step="any"
+                                   value="1"
+                                   inputmode="decimal"
+                                   required>
+                        </div>
+
+                        <div class="purchase-field">
+                            <label for="purchase-cost">
+                                Unit Cost (₹)
+                                <span class="purchase-required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="purchase-cost"
+                                   name="unitCost"
+                                   min="0"
+                                   step="0.01"
+                                   inputmode="decimal"
+                                   placeholder="0.00"
+                                   required>
+                        </div>
+
+                        <div class="purchase-field purchase-add-field"
+                             style="grid-column:1 / -1; display:flex; justify-content:flex-end;">
+
+                            <button type="submit"
+                                    class="purchase-btn purchase-btn-primary"
+                                    id="add-purchase-item-btn">
+                                <i class="fa-solid fa-plus"></i>
+                                Add Product
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+                <div class="purchase-hint">
+                    Product details will be loaded from the inventory by the final
+                    shared JavaScript. The unit cost is the purchase cost, not
+                    necessarily the selling price.
+                </div>
+
+            </section>
+
+
+            <!-- PURCHASE ITEM TABLE -->
+
+            <section class="purchase-card">
+
+                <div class="purchase-card-heading">
+                    <div class="purchase-card-title">
+                        <div class="purchase-card-icon">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+
+                        <div>
+                            <h2>Purchase Items</h2>
+                            <p class="purchase-card-subtitle">
+                                Review the products received from the supplier.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button type="button"
+                            class="purchase-btn purchase-btn-secondary"
+                            id="clear-purchase-items-btn">
+                        <i class="fa-solid fa-trash-can"></i>
+                        Clear Items
+                    </button>
+                </div>
+
+                <div class="purchase-table-wrap">
+
+                    <table class="purchase-table">
+
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th class="text-right">Unit Cost</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-right">Amount</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="purchase-items-body">
+
+                            <tr>
+                                <td colspan="5" class="purchase-empty">
+                                    <i class="fa-solid fa-box-open"></i>
+                                    <span>No products added yet.</span>
+                                    <span>
+                                        Select a product above to begin recording the purchase.
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- PURCHASE TOTALS AND ACTIONS -->
+
+            <section class="purchase-card">
+
+                <div class="purchase-card-heading">
+                    <div class="purchase-card-title">
+                        <div class="purchase-card-icon">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+
+                        <div>
+                            <h2>Purchase Summary</h2>
+                            <p class="purchase-card-subtitle">
+                                Review the total cost before recording the purchase.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="purchase-summary-layout">
+
+                    <div>
+
+                        <div class="purchase-note-box">
+                            <i class="fa-solid fa-circle-info"></i>
+
+                            <span>
+                                Confirm the supplier, purchase date, quantities and
+                                unit costs before saving. When the purchase is completed,
+                                the final shared JavaScript will record the transaction
+                                and increase the corresponding product stock.
+                            </span>
+                        </div>
+
+                        <div class="purchase-field" style="margin-top:20px;">
+                            <label for="purchase-notes">
+                                Purchase Notes
+                                <span class="optional">(optional)</span>
+                            </label>
+
+                            <textarea id="purchase-notes"
+                                      name="purchaseNotes"
+                                      form="purchase-form"
+                                      placeholder="Add delivery details or other notes..."
+                                      rows="3"></textarea>
+                        </div>
+
+                        <div class="purchase-actions">
+
+                            <button type="button"
+                                    class="purchase-btn purchase-btn-secondary"
+                                    id="reset-purchase-btn">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                Reset Form
+                            </button>
+
+                            <button type="button"
+                                    class="purchase-btn purchase-btn-success"
+                                    id="save-purchase-btn">
+                                <i class="fa-solid fa-check-circle"></i>
+                                Complete Purchase
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="purchase-totals">
+
+                        <div class="purchase-total-row">
+                            <span>Subtotal</span>
+                            <strong id="purchase-subtotal">₹0.00</strong>
+                        </div>
+
+                        <div class="purchase-field"
+                             style="margin-bottom:17px;">
+
+                            <label for="purchase-extra-cost">
+                                Additional Charges (₹)
+                            </label>
+
+                            <input type="number"
+                                   id="purchase-extra-cost"
+                                   name="additionalCharges"
+                                   value="0"
+                                   min="0"
+                                   step="0.01"
+                                   inputmode="decimal">
+                        </div>
+
+                        <div class="purchase-total-row">
+                            <span>Additional Charges</span>
+                            <strong id="purchase-extra-cost-display">₹0.00</strong>
+                        </div>
+
+                        <div class="purchase-total-row grand-total">
+                            <span>Grand Total</span>
+                            <strong id="purchase-grand-total">₹0.00</strong>
+                        </div>
+
+                        <p class="purchase-hint">
+                            Additional charges may include delivery or transport costs.
+                            Tax calculations can be configured if applicable.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RECENT PURCHASES -->
+
+            <section class="purchase-card">
+
+                <div class="purchase-card-heading">
+
+                    <div class="purchase-card-title">
+                        <div class="purchase-card-icon">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+
+                        <div>
+                            <h2>Purchase History</h2>
+                            <p class="purchase-card-subtitle">
+                                View recorded supplier purchases.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="purchase-search">
+                        <input type="search"
+                               id="purchase-search"
+                               placeholder="Search purchase records..."
+                               aria-label="Search purchase records">
+                    </div>
+
+                </div>
+
+                <div class="purchase-table-wrap">
+
+                    <table class="purchase-table">
+
+                        <thead>
+                            <tr>
+                                <th>Purchase No.</th>
+                                <th>Date</th>
+                                <th>Supplier</th>
+                                <th>Invoice No.</th>
+                                <th class="text-right">Amount</th>
+                                <th>Payment Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="purchase-history-body">
+
+                            <tr>
+                                <td colspan="7" class="purchase-empty">
+                                    <i class="fa-solid fa-receipt"></i>
+                                    <span>No purchase records available.</span>
+                                    <span>
+                                        Completed purchases will appear here after the
+                                        shared JavaScript is connected.
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="purchase-hint">
+                    Purchase history will be connected to the same data system as
+                    Products, Suppliers, Dashboard and Reports.
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+
+            <footer class="purchase-footer">
+                © <span id="footer-year">2026</span>
+                WORLD VISION ELECTRONICS. All rights reserved.
+            </footer>
+
+        </div>
+
+    </main>
+
+
+    <!--
+        Shared script.js will be finalized after all 10 HTML pages
+        have been completed and their IDs verified.
+    -->
+
+</body>
+</html>
+```

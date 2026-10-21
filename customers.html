@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customers | WORLD VISION ELECTRONICS</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR: keep identical to the other pages -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                <img src="logo.png" alt="WORLD VISION ELECTRONICS Logo">
+            </div>
+
+            <div class="brand-text">
+                <h2>WORLD VISION</h2>
+                <span>ELECTRONICS</span>
+                <small>Shop Management System</small>
+            </div>
+        </div>
+
+        <div class="location">
+            <i class=""></i>
+            Cherupuzha, Kannur, Kerala
+        </div>
+
+        <p class="nav-heading">MAIN MENU</p>
+
+        <nav class="main-navigation">
+
+            <a href="index.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="products.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-boxes-stacked"></i></span>
+                <span>Products &amp; Inventory</span>
+            </a>
+
+            <a href="billing.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
+                <span>Billing</span>
+            </a>
+
+            
+
+            <a href="customers.html" class="nav-link active" aria-current="page">
+                <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+                <span>Customers</span>
+            </a>
+
+            <a href="suppliers.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Suppliers</span>
+            </a>
+
+            <a href="sales.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <span>Sales Register</span>
+            </a>
+            <a href="expenses.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Expenses</span>
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                <span>Reports</span>
+            </a>
+            <a href="settings.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-icon">
+                <i class="fa-solid fa-store"></i>
+            </div>
+
+            <div>
+                <strong>WORLD VISION</strong>
+                <small>Electronics Store</small>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+   <main class="main-content">
+
+        <header class="topbar">
+            <div class="page-heading">
+                <p class="eyebrow">STORE MANAGEMENT</p>
+                <h1>Customers</h1>
+                <p class="page-subtitle">
+                </p>
+            </div>
+
+           <div class="topbar-right">
+                <div class="topbar-date">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span id="current-date">Loading date...</span>
+                </div>
+
+                <div class="user-avatar">
+    <img src="mylogo.png" alt="WORLD VISION ELECTRONICS">
+</div>
+        </header>
+
+        <!-- SUMMARY CARDS -->
+        <section class="summary-grid">
+
+            <article class="summary-card">
+                <div class="summary-card-icon blue">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div class="summary-card-content">
+                    <p>Total Customers</p>
+                    <h2 id="total-customers">0</h2>
+                    <small>Registered customers</small>
+                </div>
+            </article>
+
+            <article class="summary-card">
+                <div class="summary-card-icon green">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+
+                <div class="summary-card-content">
+                    <p>Active Customers</p>
+                    <h2 id="active-customers">0</h2>
+                    <small>Customers with recorded activity</small>
+                </div>
+            </article>
+
+            <article class="summary-card">
+                <div class="summary-card-icon purple">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+
+                <div class="summary-card-content">
+                    <p>Total Customer Sales</p>
+                    <h2 id="customer-sales-value">₹0.00</h2>
+                    <small>Recorded customer sales</small>
+                </div>
+            </article>
+
+        </section>
+
+
+        <!-- CUSTOMER FORM -->
+        <section class="content-card">
+
+            <div class="card-heading">
+                <div class="card-title">
+                    <div class="card-title-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+
+                    <div>
+                        <h2 id="customer-form-heading">Add Customer</h2>
+                        <p>Enter the customer's details below.</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="customer-form">
+
+                <input type="hidden" id="customer-id" name="customer-id">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="customer-name">Customer Name *</label>
+                        <input
+                            type="text"
+                            id="customer-name"
+                            name="customer-name"
+                            placeholder="Enter full name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-phone">Phone Number *</label>
+                        <input
+                            type="tel"
+                            id="customer-phone"
+                            name="customer-phone"
+                            placeholder="Enter phone number"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-email">Email Address</label>
+                        <input
+                            type="email"
+                            id="customer-email"
+                            name="customer-email"
+                            placeholder="Enter email address"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-type">Customer Type</label>
+                        <select id="customer-type" name="customer-type">
+                            <option value="Regular">Regular Customer</option>
+                            <option value="Wholesale">Wholesale Customer</option>
+                            <option value="Business">Business Customer</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="customer-address">Address</label>
+                        <textarea
+                            id="customer-address"
+                            name="customer-address"
+                            rows="3"
+                            placeholder="Enter house name, locality and address"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-notes">Notes</label>
+                        <input
+                            type="text"
+                            id="customer-notes"
+                            name="customer-notes"
+                            placeholder="Optional customer notes"
+                        >
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="save-customer-btn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Customer
+                    </button>
+
+                    <button type="reset" class="btn btn-secondary" id="reset-customer-btn">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        Clear Form
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- CUSTOMER RECORDS -->
+        <section class="content-card">
+
+            <div class="card-heading">
+                <div class="card-title">
+                    <div class="card-title-icon">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+
+                    <div>
+                        <h2>Customer Records</h2>
+                        <p>Search and manage registered customers.</p>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-secondary" id="export-customers-btn">
+                    <i class="fa-solid fa-file-export"></i>
+                    Export Customers
+                </button>
+            </div>
+
+
+            <div class="table-toolbar">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="search"
+                        id="customer-search"
+                        placeholder="Search by name, phone or email..."
+                        aria-label="Search customers"
+                    >
+                </div>
+
+                <div class="filter-group">
+                    <label for="customer-type-filter">Customer Type</label>
+
+                    <select id="customer-type-filter">
+                        <option value="all">All Types</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Wholesale">Wholesale</option>
+                        <option value="Business">Business</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Sl. No.</th>
+                            <th>Customer</th>
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                            <th>Customer Type</th>
+                            <th>Total Purchases</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="customers-table-body">
+                        <tr>
+                            <td colspan="7" class="empty-state">
+                                <i class="fa-solid fa-users"></i>
+                                <p>No customer records yet.</p>
+                                <small>Customers will appear here after they are saved.</small>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="table-footer">
+                <span>
+                    Showing <strong id="customer-record-count">0</strong> customer records
+                </span>
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="page-footer">
+            <p>
+                &copy; <span id="footer-year">2026</span>
+                WORLD VISION ELECTRONICS.
+                All rights reserved.
+            </p>
+
+            <span>Cherupuzha, Kannur, Kerala – 670511</span>
+        </footer>
+
+    </main>
+
+    <!-- Final shared JavaScript will be created after all 10 pages are complete. -->
+    <script src="customers.js" defer></script>
+
+</body>
+</html>

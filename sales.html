@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sales Register | WORLD VISION ELECTRONICS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* Logo images only; sidebar layout remains in style.css */
+        .brand-mark img {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 50%;
+        }
+
+        /* Sales page styles */
+        .sales-page {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .sales-summary {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .sales-summary-card,
+        .sales-panel {
+            min-width: 0;
+            background: #fff;
+            border: 1px solid var(--border, #e3e8f1);
+            border-radius: 14px;
+            box-shadow: var(--shadow, 0 5px 20px #111d3d0f);
+        }
+
+        .sales-summary-card {
+            padding: 20px;
+        }
+
+        .sales-summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .sales-summary-label {
+            color: var(--muted, #778198);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .sales-summary-icon {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: #e9efff;
+            color: #2454d6;
+            font-size: 17px;
+        }
+
+        .sales-summary-card:nth-child(2) .sales-summary-icon {
+            background: #e1f8eb;
+            color: #159653;
+        }
+
+        .sales-summary-card:nth-child(3) .sales-summary-icon {
+            background: #fff0d8;
+            color: #d97706;
+        }
+
+        .sales-summary-card:nth-child(4) .sales-summary-icon {
+            background: #f1e8ff;
+            color: #7c3aed;
+        }
+
+        .sales-summary-value {
+            display: block;
+            font-size: clamp(21px, 2vw, 27px);
+            line-height: 1.4;
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .sales-summary-note {
+            display: block;
+            margin-top: 5px;
+            color: var(--muted, #778198);
+            font-size: 10px;
+        }
+
+        .sales-panel {
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .sales-panel-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .sales-panel-heading h2 {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .sales-panel-heading p {
+            color: var(--muted, #778198);
+            font-size: 11px;
+        }
+
+        .sales-filters {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .sales-search {
+            position: relative;
+        }
+
+        .sales-search i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8993a6;
+        }
+
+        .sales-filters input,
+        .sales-filters select {
+            min-height: 40px;
+            max-width: 100%;
+            border: 1px solid var(--border, #e3e8f1);
+            border-radius: 9px;
+            padding: 9px 11px;
+            background: #fff;
+            color: var(--text, #182238);
+            font: inherit;
+            font-size: 11px;
+        }
+
+        .sales-search input {
+            width: 225px;
+            padding-left: 34px;
+        }
+
+        .sales-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            min-height: 40px;
+            border: 0;
+            border-radius: 9px;
+            padding: 10px 14px;
+            background: var(--blue, #2454d6);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .sales-btn:hover {
+            filter: brightness(.94);
+        }
+
+        .sales-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border, #e3e8f1);
+            border-radius: 10px;
+        }
+
+        .sales-table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        .sales-table thead {
+            background: #f7f9fd;
+        }
+
+        .sales-table th {
+            padding: 13px;
+            color: #667085;
+            font-size: 9px;
+            letter-spacing: .5px;
+            text-align: left;
+            text-transform: uppercase;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border, #e3e8f1);
+        }
+
+        .sales-table td {
+            padding: 13px;
+            font-size: 11px;
+            vertical-align: middle;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .sales-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .sales-table tbody tr:hover {
+            background: #f8faff;
+        }
+
+        .sales-invoice {
+            color: var(--blue, #2454d6);
+            font-weight: 800;
+        }
+
+        .sales-payment,
+        .sales-status {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 4px 9px;
+            font-size: 10px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .sales-payment {
+            color: #475569;
+            background: #eef2f7;
+        }
+
+        .sales-status {
+            color: #15803d;
+            background: #dcfce7;
+        }
+
+        .sales-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .sales-action-btn {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border, #e3e8f1);
+            border-radius: 8px;
+            background: #fff;
+            color: #526078;
+            cursor: pointer;
+        }
+
+        .sales-action-btn:hover {
+            background: #edf2ff;
+            color: var(--blue, #2454d6);
+        }
+
+        .sales-empty {
+            padding: 35px 15px !important;
+            text-align: center;
+            color: var(--muted, #778198);
+        }
+
+        .sales-empty i {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 29px;
+            color: #a6afc0;
+        }
+
+        .sales-empty strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text, #182238);
+        }
+
+        .sales-empty p {
+            font-size: 11px;
+        }
+
+        .sales-panel-footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-top: 15px;
+            color: var(--muted, #778198);
+            font-size: 10px;
+        }
+
+        @media (max-width: 1150px) {
+            .sales-summary {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            .sales-panel {
+                padding: 15px;
+            }
+
+            .sales-summary {
+                gap: 10px;
+            }
+
+            .sales-summary-card {
+                padding: 14px;
+            }
+
+            .sales-summary-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .sales-panel-heading {
+                align-items: stretch;
+            }
+
+            .sales-filters {
+                width: 100%;
+            }
+
+            .sales-search,
+            .sales-search input,
+            .sales-filters select,
+            .sales-filters input[type="date"],
+            .sales-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="app-container">
+
+    <!-- SHARED SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                <img src="logo.png"
+                     alt="WORLD VISION ELECTRONICS Logo">
+            </div>
+
+            <div class="brand-text">
+                <h2>WORLD VISION</h2>
+                <span>ELECTRONICS</span>
+                <small>Shop Management System</small>
+            </div>
+        </div>
+
+        <div class="location">
+            <i class=""></i>
+            Cherupuzha, Kannur, Kerala
+        </div>
+
+        <p class="nav-heading">MAIN MENU</p>
+
+        <nav class="main-navigation">
+
+            <a href="index.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-house"></i>
+                </span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="products.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </span>
+                <span>Products & Inventory</span>
+            </a>
+
+            <a href="billing.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </span>
+                <span>Billing</span>
+            </a>
+
+            
+
+            <a href="customers.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-users"></i>
+                </span>
+                <span>Customers</span>
+            </a>
+
+            <a href="suppliers.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-truck-field"></i>
+                </span>
+                <span>Suppliers</span>
+            </a>
+             
+            <a href="sales.html" class="nav-link active"
+               aria-current="page">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </span>
+                <span>Sales Register</span>
+            </a>
+            
+            <a href="expenses.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Expenses</span>
+            </a>
+            
+            <a href="reports.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </span>
+                <span>Reports</span>
+            </a>
+
+           
+
+            <a href="settings.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-gear"></i>
+                </span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div class="page-heading">
+                <p class="eyebrow">STORE MANAGEMENT</p>
+                <h1>Sales Register</h1>
+                <p class="page-subtitle">
+                    Track invoices, payments and completed sales.
+                </p>
+            </div>
+
+            <div class="topbar-right">
+                <div class="topbar-date">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span id="current-date">Loading date...</span>
+                </div>
+
+                <div class="user-avatar">
+                    <img src="mylogo.png"
+                         alt="WORLD VISION ELECTRONICS">
+                </div>
+            </div>
+        </header>
+
+        <section class="sales-page">
+
+            <!-- SALES SUMMARY -->
+            <div class="sales-summary">
+
+                <article class="sales-summary-card">
+                    <div class="sales-summary-top">
+                        <span class="sales-summary-label">Total Sales</span>
+                        <span class="sales-summary-icon">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </span>
+                    </div>
+                    <strong class="sales-summary-value"
+                            id="sales-total-amount">₹0.00</strong>
+                    <small class="sales-summary-note">Recorded sales value</small>
+                </article>
+
+                <article class="sales-summary-card">
+                    <div class="sales-summary-top">
+                        <span class="sales-summary-label">Total Invoices</span>
+                        <span class="sales-summary-icon">
+                            <i class="fa-solid fa-file-invoice"></i>
+                        </span>
+                    </div>
+                    <strong class="sales-summary-value"
+                            id="sales-total-invoices">0</strong>
+                    <small class="sales-summary-note">Recorded transactions</small>
+                </article>
+
+                <article class="sales-summary-card">
+                    <div class="sales-summary-top">
+                        <span class="sales-summary-label">Cash Sales</span>
+                        <span class="sales-summary-icon">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                        </span>
+                    </div>
+                    <strong class="sales-summary-value"
+                            id="sales-cash-total">₹0.00</strong>
+                    <small class="sales-summary-note">Sales paid in cash</small>
+                </article>
+
+                <article class="sales-summary-card">
+                    <div class="sales-summary-top">
+                        <span class="sales-summary-label">Today's Sales</span>
+                        <span class="sales-summary-icon">
+                            <i class="fa-solid fa-calendar-day"></i>
+                        </span>
+                    </div>
+                    <strong class="sales-summary-value"
+                            id="sales-today-total">₹0.00</strong>
+                    <small class="sales-summary-note">Sales recorded today</small>
+                </article>
+
+            </div>
+
+            <!-- SALES REGISTER TABLE -->
+            <section class="sales-panel">
+
+                <div class="sales-panel-heading">
+                    <div>
+                        <h2>Sales History</h2>
+                        <p>Search and review your sales invoices.</p>
+                    </div>
+
+                    <div class="sales-filters">
+
+                        <div class="sales-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="search"
+                                   id="sales-search"
+                                   placeholder="Search invoice or customer..."
+                                   aria-label="Search sales">
+                        </div>
+
+                        <input type="date"
+                               id="sales-date-filter"
+                               aria-label="Filter sales by date">
+
+                        <select id="sales-payment-filter"
+                                aria-label="Filter by payment method">
+                            <option value="">All Payments</option>
+                            <option value="Cash">Cash</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Card">Card</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Credit">Credit</option>
+                        </select>
+
+                        <button type="button"
+                                class="sales-btn"
+                                id="sales-export-btn">
+                            <i class="fa-solid fa-download"></i>
+                            Export CSV
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="sales-table-wrap">
+                    <table class="sales-table">
+
+                        <thead>
+                            <tr>
+                                <th>Invoice No.</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Payment</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="sales-table-body">
+                            <tr>
+                                <td colspan="8" class="sales-empty">
+                                    <i class="fa-solid fa-receipt"></i>
+                                    <strong>No sales recorded yet</strong>
+                                    <p>
+                                        Sales will appear here when the
+                                        shared JavaScript is connected.
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="sales-panel-footer">
+                    <span id="sales-record-count">Showing 0 sales</span>
+                    <span>Currency: Indian Rupees (₹)</span>
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+</div>
+
+<!--
+    Shared script.js will be created after all 10 HTML pages
+    are completed. Sales calculations, search, filters,
+    ar<script src="sales.js" defer></script><script src="sales.js" defer></script>e completed. Sales calculations, search, filters,
+    invoice viewing, printing and CSV export will be connected then.
+-->
+<script src="sales.js" defer></script>
+</body>
+</html>

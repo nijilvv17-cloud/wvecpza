@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products & Inventory | WORLD VISION ELECTRONICS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                <img src="logo.png" alt="WORLD VISION ELECTRONICS Logo">
+            </div>
+
+            <div class="brand-text">
+                <h2>WORLD VISION</h2>
+                <span>ELECTRONICS</span>
+                <small>Shop Management System</small>
+            </div>
+        </div>
+
+        <div class="location">
+            <i class=></i>
+            Cherupuzha, Kannur, Kerala
+        </div>
+
+        <p class="nav-heading">MAIN MENU</p>
+
+        <nav class="main-navigation">
+
+            <a href="index.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="products.html" class="nav-link active">
+                <span class="nav-icon"><i class="fa-solid fa-boxes-stacked"></i></span>
+                <span>Products & Inventory</span>
+            </a>
+
+            <a href="billing.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
+                <span>Billing</span>
+            </a>
+
+            <a href="customers.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+                <span>Customers</span>
+            </a>
+
+            <a href="suppliers.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Suppliers</span>
+            </a>
+
+            <a href="sales.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <span>Sales Register</span>
+            </a>
+            <a href="expenses.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Expenses</span>
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                <span>Reports</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-icon">
+                <i class="fa-solid fa-store"></i>
+            </div>
+            <div>
+                <strong>WORLD VISION</strong>
+                <small>Electronics Store</small>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div class="page-heading">
+                <p class="eyebrow">STORE MANAGEMENT</p>
+                <h1>Products &amp; Inventory</h1>
+                <p class="page-subtitle">
+                   Checkout your Inventory
+                </p>
+            </div>
+
+           <div class="topbar-right">
+                <div class="topbar-date">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span id="current-date">Loading date...</span>
+                </div>
+
+              <div class="user-avatar">
+    <img src="mylogo.png" alt="WORLD VISION ELECTRONICS">
+</div>
+        </header>
+        <!-- PAGE HEADING -->
+    
+        <!-- SUMMARY CARDS -->
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <div class="stat-card-top">
+                    <span class="stat-label">Total Products</span>
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                </div>
+                <h2 id="total-products">0</h2>
+                <p class="stat-description">Different products in inventory</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-card-top">
+                    <span class="stat-label">Total Stock Units</span>
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-cubes-stacked"></i>
+                    </div>
+                </div>
+                <h2 id="total-stock">0</h2>
+                <p class="stat-description">Units currently available</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-card-top">
+                    <span class="stat-label">Low Stock Items</span>
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                </div>
+                <h2 id="low-stock-count">0</h2>
+                <p class="stat-description">Products requiring attention</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-card-top">
+                    <span class="stat-label">Inventory Value</span>
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                    </div>
+                </div>
+                <h2 id="stock-value">₹0.00</h2>
+                <p class="stat-description">Based on purchase cost and stock</p>
+            </article>
+
+        </section>
+
+        <!-- ADD PRODUCT FORM -->
+        <section class="content-card" id="product-form-section">
+
+            <div class="card-header">
+                <div>
+                    <h2>
+                        <i class="fa-solid fa-circle-plus"></i>
+                        <span id="product-form-title">Add New Product</span>
+                    </h2>
+                    <p>Enter the product details below.</p>
+                </div>
+
+                <span class="section-tag">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    Product Details
+                </span>
+            </div>
+
+            <form id="product-form">
+
+                <input type="hidden" id="product-id">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="product-name">Product Name *</label>
+                        <input type="text" id="product-name"
+                               placeholder="e.g. Bluetooth Speaker" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-code">Product Code / SKU</label>
+                        <input type="text" id="product-code"
+                               placeholder="e.g. WV-1001">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-category">Category *</label>
+                        <select id="product-category" required>
+                            <option value="">Select category</option>
+                            <option value="Mobile Accessories">Mobile Accessories</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Computer Accessories">Computer Accessories</option>
+                            <option value="Audio Devices">Audio Devices</option>
+                            <option value="Televisions">Televisions</option>
+                            <option value="Home Appliances">Home Appliances</option>
+                            <option value="Cables & Chargers">Cables & Chargers</option>
+                            <option value="Storage Devices">Storage Devices</option>
+                            <option value="Networking">Networking</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-brand">Brand</label>
+                        <input type="text" id="product-brand"
+                               placeholder="e.g. Samsung, HP, Sony">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-cost">Purchase Price (₹) *</label>
+                        <input type="number" id="product-cost"
+                               min="0" step="0.01"
+                               placeholder="0.00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-price">Selling Price (₹) *</label>
+                        <input type="number" id="product-price"
+                               min="0" step="0.01"
+                               placeholder="0.00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-quantity">Opening Stock *</label>
+                        <input type="number" id="product-quantity"
+                               min="0" step="1"
+                               placeholder="Enter available quantity" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-min-stock">Minimum Stock Alert</label>
+                        <input type="number" id="product-min-stock"
+                               min="0" step="1" value="5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-supplier">Supplier</label>
+                        <input type="text" id="product-supplier"
+                               placeholder="Enter supplier name">
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label for="product-description">Description / Notes</label>
+                        <textarea id="product-description" rows="3"
+                                  placeholder="Optional product details"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="reset" class="btn btn-secondary"
+                            id="reset-product-btn">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        Clear Form
+                    </button>
+
+                    <button type="submit" class="btn btn-primary"
+                            id="save-product-btn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Product
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+
+        <!-- INVENTORY TABLE -->
+        <section class="content-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Inventory List
+                    </h2>
+                    <p>Search, filter and manage your available products.</p>
+                </div>
+
+                <span class="section-tag">
+                    <i class="fa-solid fa-database"></i>
+                    <span id="product-record-count">0 records</span>
+                </span>
+            </div>
+
+            <div class="table-toolbar">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="product-search"
+                           placeholder="Search by product name or code...">
+                </div>
+
+                <div class="filter-group">
+                    <select id="category-filter" aria-label="Filter by category">
+                        <option value="">All Categories</option>
+                        <option value="Mobile Accessories">Mobile Accessories</option>
+                        <option value="Computers">Computers</option>
+                        <option value="Computer Accessories">Computer Accessories</option>
+                        <option value="Audio Devices">Audio Devices</option>
+                        <option value="Televisions">Televisions</option>
+                        <option value="Home Appliances">Home Appliances</option>
+                        <option value="Cables & Chargers">Cables & Chargers</option>
+                        <option value="Storage Devices">Storage Devices</option>
+                        <option value="Networking">Networking</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <select id="stock-filter" aria-label="Filter by stock status">
+                        <option value="">All Stock Levels</option>
+                        <option value="in-stock">In Stock</option>
+                        <option value="low-stock">Low Stock</option>
+                        <option value="out-of-stock">Out of Stock</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Code</th>
+                            <th>Category</th>
+                            <th>Cost Price</th>
+                            <th>Selling Price</th>
+                            <th>Stock</th>
+                            <th>Stock Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="products-table-body">
+                        <tr>
+                            <td colspan="8" class="empty-state">
+                                <i class="fa-solid fa-box-open"></i>
+                                <strong>No products added yet</strong>
+                                <span>Add your first product using the form above.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <span>Showing inventory records</span>
+                <span>
+                    <i class="fa-solid fa-shield-halved"></i>
+                    WORLD VISION ELECTRONICS
+                </span>
+            </div>
+
+        </section>
+
+        <!-- STOCK ALERTS -->
+        <section class="content-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>
+                        <i class="fa-solid fa-bell"></i>
+                        Stock Alerts
+                    </h2>
+                    <p>Products that need restocking or attention.</p>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Code</th>
+                            <th>Available Stock</th>
+                            <th>Minimum Required</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="inventory-alerts-body">
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <strong>No stock alerts</strong>
+                                <span>Low-stock products will appear here.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="page-footer">
+            <p>
+                © <span id="footer-year"></span>
+                WORLD VISION ELECTRONICS. All rights reserved.
+            </p>
+            <p>Cherupuzha, Kannur, Kerala – 670511</p>
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+<script src="products.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,907 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | WORLD VISION ELECTRONICS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        .settings-content {
+            padding: 25px;
+        }
+
+        .settings-heading {
+            margin-bottom: 25px;
+        }
+
+        .settings-heading h1 {
+            font-size: 27px;
+            margin: 0 0 7px;
+        }
+
+        .settings-heading p {
+            color: #718096;
+            margin: 0;
+        }
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .settings-menu,
+        .settings-panel {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .settings-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .settings-menu button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 12px;
+            border: none;
+            border-radius: 9px;
+            background: transparent;
+            color: #475569;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .settings-menu button i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .settings-menu button:hover {
+            background: #f1f5f9;
+        }
+
+        .settings-menu button.active {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .settings-panel {
+            min-width: 0;
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-panel-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #edf0f5;
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+        }
+
+        .settings-panel-heading h2 {
+            font-size: 19px;
+            margin: 0 0 6px;
+        }
+
+        .settings-panel-heading p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0;
+        }
+
+        .settings-panel-heading > i {
+            color: #2563eb;
+            font-size: 21px;
+        }
+
+        .settings-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .settings-form-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .settings-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .settings-field label {
+            color: #475569;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .settings-field input,
+        .settings-field select,
+        .settings-field textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px 12px;
+            border: 1px solid #dbe2ea;
+            border-radius: 8px;
+            background: white;
+            color: #334155;
+            font: inherit;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .settings-field textarea {
+            resize: vertical;
+            min-height: 85px;
+        }
+
+        .settings-field input:focus,
+        .settings-field select:focus,
+        .settings-field textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .settings-field small {
+            color: #94a3b8;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .settings-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-top: 1px solid #edf0f5;
+            padding-top: 20px;
+            margin-top: 4px;
+        }
+
+        .settings-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            color: #334155;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .settings-button.primary {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .settings-button.danger {
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+
+        .settings-button:hover {
+            opacity: .88;
+        }
+
+        .settings-info-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            padding: 15px;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #1e40af;
+            margin-bottom: 22px;
+        }
+
+        .settings-info-card > i {
+            margin-top: 3px;
+        }
+
+        .settings-info-card strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .settings-info-card p {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .settings-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 17px 0;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .settings-option:last-child {
+            border-bottom: none;
+        }
+
+        .settings-option-info strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .settings-option-info p {
+            color: #64748b;
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .settings-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #2563eb;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .settings-option select {
+            max-width: 170px;
+            padding: 9px 10px;
+            border: 1px solid #dbe2ea;
+            border-radius: 8px;
+            background: white;
+            font-size: 12px;
+        }
+
+        .settings-logo-preview {
+            width: 90px;
+            height: 90px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .settings-logo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .settings-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .settings-logo-row p {
+            font-size: 12px;
+            color: #64748b;
+            margin: 0 0 10px;
+            line-height: 1.5;
+        }
+
+        .settings-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            color: #059669;
+            font-weight: 600;
+        }
+
+        .settings-version {
+            color: #94a3b8;
+            text-align: center;
+            font-size: 11px;
+            margin-top: 22px;
+        }
+
+        @media (max-width: 1000px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-menu {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .settings-content {
+                padding: 16px;
+            }
+
+            .settings-heading h1 {
+                font-size: 23px;
+            }
+
+            .settings-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-panel {
+                padding: 16px;
+            }
+
+            .settings-panel-heading h2 {
+                font-size: 17px;
+            }
+        }
+
+        @media print {
+            .sidebar,
+            .topbar,
+            .settings-menu,
+            .settings-actions {
+                display: none !important;
+            }
+
+            .main-content {
+                margin: 0 !important;
+                width: 100% !important;
+            }
+
+            .settings-content {
+                padding: 0;
+            }
+
+            .settings-layout {
+                display: block;
+            }
+
+            .settings-section {
+                display: block !important;
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">
+                <img src="logo.png" alt="WORLD VISION ELECTRONICS logo">
+            </div>
+            <div class="brand-text">
+                <h2>WORLD VISION</h2>
+                <span>ELECTRONICS</span>
+                <small>Shop Management System</small>
+            </div>
+        </div>
+
+        <div class="location">
+            <i class=""></i>
+            <div>
+                <span>Cherupuzha, Kannur, Kerala</span>
+            </div>
+        </div>
+
+        <p class="nav-heading">MAIN MENU</p>
+        
+       <nav class="main-navigation" aria-label="Main navigation">
+
+            <a href="index.html" class="nav-link ">
+                <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="products.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-boxes-stacked"></i></span>
+                <span>Products & Inventory</span>
+            </a>
+
+            <a href="billing.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
+                <span>Billing</span>
+            </a>
+
+            <a href="customers.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+                <span>Customers</span>
+            </a>
+
+            <a href="suppliers.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Suppliers</span>
+            </a>
+
+            <a href="sales.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <span>Sales Register</span>
+            </a>
+              
+            <a href="expenses.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Expenses</span>
+            </a>
+            
+            <a href="reports.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                <span>Reports</span>
+            </a>
+            
+            <a href="settings.html" class="nav-link active">
+                <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
+                <span>Settings</span>
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-icon">
+                <i class="fa-solid fa-store"></i>
+            </div>
+            <div>
+                <strong>WORLD VISION</strong>
+                <small>Electronics Store</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <span id="settings-current-date">System Settings</span>
+            </div>
+            <div class="user-avatar">
+                <img src="mylogo.png" alt="WORLD VISION ELECTRONICS">
+            </div>
+        </header>
+
+        <section class="settings-content">
+            <div class="settings-heading">
+                <h1>Settings</h1>
+                <p>Manage shop information, billing preferences and application data.</p>
+            </div>
+
+            <div class="settings-layout">
+                <nav class="settings-menu" aria-label="Settings sections">
+                    <button type="button" class="active" data-settings-tab="shop">
+                        <i class="fa-solid fa-store"></i> Shop Information
+                    </button>
+                    <button type="button" data-settings-tab="billing">
+                        <i class="fa-solid fa-file-invoice"></i> Billing Settings
+                    </button>
+                    <button type="button" data-settings-tab="inventory">
+                        <i class="fa-solid fa-boxes-stacked"></i> Inventory Settings
+                    </button>
+                    <button type="button" data-settings-tab="appearance">
+                        <i class="fa-solid fa-palette"></i> Display Preferences
+                    </button>
+                    <button type="button" data-settings-tab="data">
+                        <i class="fa-solid fa-database"></i> Data Management
+                    </button>
+                    <button type="button" data-settings-tab="about">
+                        <i class="fa-solid fa-circle-info"></i> About System
+                    </button>
+                </nav>
+
+                <div class="settings-panel">
+
+                    <!-- SHOP INFORMATION -->
+                    <section class="settings-section active" id="settings-section-shop">
+                        <div class="settings-panel-heading">
+                            <div>
+                                <h2>Shop Information</h2>
+                                <p>Maintain shop details for invoices and reports.</p>
+                            </div>
+                            <i class="fa-solid fa-store"></i>
+                        </div>
+
+                        <div class="settings-logo-row" style="margin-bottom: 25px;">
+                            <div class="settings-logo-preview">
+                                <img src="mylogo.png" alt="Shop logo preview">
+                            </div>
+                            <div>
+                                <strong style="display:block; margin-bottom:6px;">Shop Logo</strong>
+                                
+                            </div>
+                        </div>
+
+                        <form id="settings-shop-form" class="settings-form">
+                            <div class="settings-field">
+                                <label for="settings-shop-name">Shop Name *</label>
+                                <input type="text" id="settings-shop-name" value="WORLD VISION ELECTRONICS" required>
+                            </div>
+
+                            <div class="settings-form-row">
+                                <div class="settings-field">
+                                    <label for="settings-phone">Phone Number</label>
+                                    <input type="tel" id="settings-phone" placeholder="Enter shop phone number">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="settings-email">Email Address</label>
+                                    <input type="email" id="settings-email" placeholder="Enter shop email">
+                                </div>
+                            </div>
+
+                            <div class="settings-field">
+                                <label for="settings-address">Shop Address</label>
+                                <textarea id="settings-address" placeholder="Enter full shop address">Cherupuzha, Kannur, Kerala - 670511</textarea>
+                            </div>
+
+                            <div class="settings-form-row">
+                                <div class="settings-field">
+                                    <label for="settings-currency">Currency</label>
+                                    <select id="settings-currency">
+                                        <option value="INR" selected>Indian Rupee (₹)</option>
+                                        <option value="USD">US Dollar ($)</option>
+                                        <option value="EUR">Euro (€)</option>
+                                        <option value="GBP">British Pound (£)</option>
+                                    </select>
+                                </div>
+
+                                <div class="settings-field">
+                                    <label for="settings-timezone">Time Zone</label>
+                                    <select id="settings-timezone">
+                                        <option value="Asia/Kolkata" selected>India Standard Time</option>
+                                        <option value="UTC">UTC</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button type="reset" class="settings-button">Reset</button>
+                                <button type="submit" class="settings-button primary">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Shop Details
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- BILLING SETTINGS -->
+                    <section class="settings-section" id="settings-section-billing">
+                        <div class="settings-panel-heading">
+                            <div>
+                                <h2>Billing Settings</h2>
+                                <p>Configure invoice numbering and billing defaults.</p>
+                            </div>
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+
+                        <form id="settings-billing-form" class="settings-form">
+                            <div class="settings-form-row">
+                                <div class="settings-field">
+                                    <label for="settings-invoice-prefix">Invoice Prefix</label>
+                                    <input type="text" id="settings-invoice-prefix" value="WVE">
+                                    <small>Example: WVE-0001</small>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="settings-invoice-start">Starting Invoice Number</label>
+                                    <input type="number" id="settings-invoice-start" min="1" value="1">
+                                </div>
+                            </div>
+
+                            <div class="settings-form-row">
+                                <div class="settings-field">
+                                    <label for="settings-default-payment">Default Payment Method</label>
+                                    <select id="settings-default-payment">
+                                        <option value="Cash">Cash</option>
+                                        <option value="UPI">UPI</option>
+                                        <option value="Card">Card</option>
+                                        <option value="Bank Transfer">Bank Transfer</option>
+                                    </select>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="settings-tax-rate">Default Tax Rate (%)</label>
+                                    <input type="number" id="settings-tax-rate" min="0" max="100" step="0.01" value="0">
+                                </div>
+                            </div>
+
+                            <div class="settings-info-card">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <div>
+                                    <strong>Tax configuration</strong>
+                                    <p>Set tax only according to the applicable rules for your business. A configured rate does not by itself establish GST registration or tax compliance.</p>
+                                </div>
+                            </div>
+
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <strong>Show shop address on invoices</strong>
+                                    <p>Print the saved shop address on customer bills.</p>
+                                </div>
+                                <input type="checkbox" id="settings-show-address" checked>
+                            </div>
+
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <strong>Show invoice date and time</strong>
+                                    <p>Include the billing date and time on printed invoices.</p>
+                                </div>
+                                <input type="checkbox" id="settings-show-datetime" checked>
+                            </div>
+
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <strong>Print customer details</strong>
+                                    <p>Include customer details when available.</p>
+                                </div>
+                                <input type="checkbox" id="settings-show-customer" checked>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button type="reset" class="settings-button">Reset</button>
+                                <button type="submit" class="settings-button primary">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Billing Settings
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- INVENTORY SETTINGS -->
+                    <section class="settings-section" id="settings-section-inventory">
+                        <div class="settings-panel-heading">
+                            <div>
+                                <h2>Inventory Settings</h2>
+                                <p>Set stock warning levels and product defaults.</p>
+                            </div>
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+
+                        <form id="settings-inventory-form" class="settings-form">
+                            <div class="settings-form-row">
+                                <div class="settings-field">
+                                    <label for="settings-low-stock">Low Stock Warning Level</label>
+                                    <input type="number" id="settings-low-stock" min="0" value="5">
+                                    <small>Products at or below this quantity can be flagged.</small>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="settings-default-unit">Default Product Unit</label>
+                                    <select id="settings-default-unit">
+                                        <option value="Piece">Piece</option>
+                                        <option value="Box">Box</option>
+                                        <option value="Pack">Pack</option>
+                                        <option value="Kg">Kilogram</option>
+                                        <option value="Litre">Litre</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <strong>Enable low-stock warnings</strong>
+                                    <p>Highlight products that need replenishment.</p>
+                                </div>
+                                <input type="checkbox" id="settings-enable-low-stock" checked>
+                            </div>
+
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <strong>Warn when stock reaches zero</strong>
+                                    <p>Flag products that have no available quantity.</p>
+                                </div>
+                                <input type="checkbox" id="settings-zero-stock-warning" checked>
+                            </div>
+
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <strong>Prevent sales exceeding available stock</strong>
+                                    <p>Use this option to prevent negative inventory during billing.</p>
+                                </div>
+                                <input type="checkbox" id="settings-prevent-negative-stock" checked>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button type="reset" class="settings-button">Reset</button>
+                                <button type="submit" class="settings-button primary">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Inventory Settings
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- DISPLAY PREFERENCES -->
+                    <section class="settings-section" id="settings-section-appearance">
+                        <div class="settings-panel-heading">
+                            <div>
+                                <h2>Display Preferences</h2>
+                                <p>Adjust date, number and table display preferences.</p>
+                            </div>
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+
+                        <form id="settings-appearance-form" class="settings-form">
+                            <div class="settings-form-row">
+                                <div class="settings-field">
+                                    <label for="settings-date-format">Date Format</label>
+                                    <select id="settings-date-format">
+                                        <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                                        <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                        <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                    </select>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="settings-number-format">Number Format</label>
+                                    <select id="settings-number-format">
+                                        <option value="2" selected>2 decimal places</option>
+                                        <option value="0">Whole numbers</option>
+                                        <option value="3">3 decimal places</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <strong>Compact table rows</strong>
+                                    <p>Use less vertical space in data tables.</p>
+                                </div>
+                                <input type="checkbox" id="settings-compact-tables">
+                            </div>
+
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <strong>Show confirmation before deleting records</strong>
+                                    <p>Ask for confirmation before a record is permanently removed.</p>
+                                </div>
+                                <input type="checkbox" id="settings-confirm-delete" checked>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button type="reset" class="settings-button">Reset</button>
+                                <button type="submit" class="settings-button primary">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Preferences
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- DATA MANAGEMENT -->
+                    <section class="settings-section" id="settings-section-data">
+                        <div class="settings-panel-heading">
+                            <div>
+                                <h2>Data Management</h2>
+                                <p>Manage locally saved shop records.</p>
+                            </div>
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+
+                        <div class="settings-info-card">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <div>
+                                <strong>Keep your records safe</strong>
+                                <p>This project is designed to store data in your browser using localStorage. Browser data can be lost if site data is cleared, so export backups regularly.</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="settings-option-info">
+                                <strong>Export shop data</strong>
+                                <p>Download a backup of products, sales, customers, suppliers and other saved records.</p>
+                            </div>
+                            <button type="button" class="settings-button primary" id="settings-export-data">
+                                <i class="fa-solid fa-download"></i> Export
+                            </button>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="settings-option-info">
+                                <strong>Import shop data</strong>
+                                <p>Restore records from a compatible backup file.</p>
+                            </div>
+                            <div>
+                                <input type="file" id="settings-import-file" accept=".json,application/json" hidden>
+                                <button type="button" class="settings-button" id="settings-import-trigger">
+                                    <i class="fa-solid fa-upload"></i> Choose File
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="settings-option-info">
+                                <strong>Reset shop data</strong>
+                                <p>Remove saved application records. Export a backup first. This action should require confirmation.</p>
+                            </div>
+                            <button type="button" class="settings-button danger" id="settings-reset-data">
+                                <i class="fa-solid fa-trash"></i> Reset Data
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- ABOUT SYSTEM -->
+                    <section class="settings-section" id="settings-section-about">
+                        <div class="settings-panel-heading">
+                            <div>
+                                <h2>About System</h2>
+                                <p>Information about this shop management application.</p>
+                            </div>
+                            <i class="fa-solid fa-circle-info"></i>
+                        </div>
+
+                        <div class="settings-logo-row" style="margin-bottom: 25px;">
+                            <div class="settings-logo-preview">
+                                <img src="mylogo.png" alt="WORLD VISION ELECTRONICS logo">
+                            </div>
+                            <div>
+                                <h3 style="margin:0 0 7px;">WORLD VISION ELECTRONICS</h3>
+                                <p style="font-size:13px;color:#64748b;margin:0 0 8px;">
+                                    Shop Management System
+                                </p>
+                                <span class="settings-status">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    Local Web Application
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="settings-option-info">
+                                <strong>Application</strong>
+                                <p>WORLD VISION ELECTRONICS Shop Management System</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="settings-option-info">
+                                <strong>Location</strong>
+                                <p>Cherupuzha, Kannur, Kerala - 670511</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="settings-option-info">
+                                <strong>Technology</strong>
+                                <p>HTML, CSS, JavaScript and browser localStorage</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="settings-option-info">
+                                <strong>Pages</strong>
+                                <p>Dashboard, Products, Billing, Purchases, Customers, Suppliers, Sales Register, Reports, Expenses and Settings.</p>
+                            </div>
+                        </div>
+
+                        <p class="settings-version">WORLD VISION ELECTRONICS · Shop Management System</p>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+<script src="settings.js" defer></script>
+</body>
+</html>

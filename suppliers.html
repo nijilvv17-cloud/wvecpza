@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppliers | WORLD VISION ELECTRONICS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* SUPPLIERS PAGE */
+        .suppliers-page {
+            width: 100%;
+            max-width: 1600px;
+            min-width: 0;
+            margin: 0 auto;
+        }
+
+        .supplier-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin: 24px 0;
+        }
+
+        .supplier-summary-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 0;
+            padding: 22px;
+            background: #fff;
+            border: 1px solid #e5eaf2;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(20, 39, 75, 0.035);
+        }
+
+        .supplier-summary-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            background: #edf3ff;
+            color: #285ed0;
+            font-size: 19px;
+        }
+
+        .supplier-summary-card:nth-child(2) .supplier-summary-icon {
+            color: #16834f;
+            background: #eaf8f0;
+        }
+
+        .supplier-summary-card:nth-child(3) .supplier-summary-icon {
+            color: #a66b12;
+            background: #fff5df;
+        }
+
+        .supplier-summary-info {
+            min-width: 0;
+        }
+
+        .supplier-summary-info p {
+            margin: 0 0 7px;
+            color: #778399;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .supplier-summary-info h3 {
+            margin: 0;
+            color: #1b2d4b;
+            font-size: 24px;
+            overflow-wrap: anywhere;
+        }
+
+        .supplier-content-card {
+            min-width: 0;
+            margin-bottom: 24px;
+            padding: 24px;
+            background: #fff;
+            border: 1px solid #e5eaf2;
+            border-radius: 15px;
+            box-shadow: 0 4px 16px rgba(20, 39, 75, 0.035);
+        }
+
+        .supplier-card-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 22px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .supplier-card-title {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: #1b2d4b;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .supplier-card-title i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #edf3ff;
+            color: #285ed0;
+        }
+
+        .supplier-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 19px;
+        }
+
+        .supplier-field {
+            min-width: 0;
+        }
+
+        .supplier-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .supplier-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: #42516b;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .supplier-field input,
+        .supplier-field select,
+        .supplier-field textarea {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            padding: 12px;
+            min-height: 44px;
+            border: 1px solid #dce3ed;
+            border-radius: 9px;
+            background: #fff;
+            color: #253550;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .supplier-field textarea {
+            min-height: 85px;
+            resize: vertical;
+        }
+
+        .supplier-field input:focus,
+        .supplier-field select:focus,
+        .supplier-field textarea:focus {
+            border-color: #4778e8;
+            box-shadow: 0 0 0 3px rgba(71, 120, 232, 0.10);
+        }
+
+        .supplier-field input::placeholder,
+        .supplier-field textarea::placeholder {
+            color: #a0a9b8;
+        }
+
+        .supplier-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .supplier-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 11px 17px;
+            border: 1px solid transparent;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .supplier-btn-primary {
+            background: #285ed0;
+            color: #fff;
+        }
+
+        .supplier-btn-primary:hover {
+            background: #1949b2;
+        }
+
+        .supplier-btn-secondary {
+            background: #fff;
+            border-color: #dce3ed;
+            color: #354762;
+        }
+
+        .supplier-btn-secondary:hover {
+            background: #f5f7fb;
+        }
+
+        .supplier-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .supplier-search {
+            position: relative;
+            flex: 1;
+            min-width: 220px;
+            max-width: 420px;
+        }
+
+        .supplier-search i {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8491a7;
+            pointer-events: none;
+        }
+
+        .supplier-search input {
+            width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            min-height: 43px;
+            padding: 11px 12px 11px 38px;
+            border: 1px solid #dce3ed;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .supplier-search input:focus {
+            border-color: #4778e8;
+        }
+
+        .supplier-filter {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #778399;
+            font-size: 12px;
+        }
+
+        .supplier-filter select {
+            min-height: 42px;
+            padding: 10px 12px;
+            border: 1px solid #dce3ed;
+            border-radius: 9px;
+            background: #fff;
+            color: #354762;
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .supplier-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .supplier-table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        .supplier-table th {
+            padding: 14px 12px;
+            background: #f5f7fb;
+            border-bottom: 1px solid #e5eaf2;
+            color: #6b7890;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .supplier-table td {
+            padding: 15px 12px;
+            color: #34445e;
+            border-bottom: 1px solid #edf0f5;
+            vertical-align: middle;
+        }
+
+        .supplier-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .supplier-name-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .supplier-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: #edf3ff;
+            color: #285ed0;
+            font-weight: 800;
+        }
+
+        .supplier-name-text {
+            color: #253550;
+            font-weight: 700;
+        }
+
+        .supplier-email-text {
+            display: block;
+            margin-top: 4px;
+            color: #8995a9;
+            font-size: 11px;
+        }
+
+        .supplier-status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #eaf8f0;
+            color: #16804d;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .supplier-status.inactive {
+            background: #fff0f0;
+            color: #c43c43;
+        }
+
+        .supplier-empty-state {
+            padding: 38px 15px !important;
+            text-align: center;
+            white-space: normal;
+            color: #8995a9 !important;
+        }
+
+        .supplier-empty-state i {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 30px;
+            color: #aab5c7;
+        }
+
+        .supplier-empty-state strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #53627b;
+            font-size: 13px;
+        }
+
+        .supplier-empty-state span {
+            font-size: 12px;
+        }
+
+        .supplier-table-footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid #edf0f5;
+            color: #8995a9;
+            font-size: 11px;
+        }
+
+        .supplier-help-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 18px;
+            padding: 13px;
+            border: 1px solid #e0eaff;
+            border-radius: 9px;
+            background: #f3f7ff;
+            color: #546b94;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .supplier-help-note i {
+            margin-top: 3px;
+            color: #3568cc;
+        }
+
+        @media (max-width: 1100px) {
+            .supplier-summary-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .supplier-summary-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 12px;
+            }
+
+            .supplier-content-card {
+                padding: 16px;
+            }
+
+            .supplier-form-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 14px;
+            }
+
+            .supplier-field.full-width {
+                grid-column: auto;
+            }
+
+            .supplier-toolbar {
+                align-items: stretch;
+            }
+
+            .supplier-search {
+                max-width: none;
+                min-width: 0;
+                flex-basis: 100%;
+            }
+
+            .supplier-filter {
+                justify-content: space-between;
+            }
+
+            .supplier-form-actions .supplier-btn {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SHARED SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                <img src="logo.png"
+                     alt="WORLD VISION ELECTRONICS Logo">
+            </div>
+
+            <div class="brand-text">
+                <h2>WORLD VISION</h2>
+                <span>ELECTRONICS</span>
+                <small>Shop Management System</small>
+            </div>
+        </div>
+
+        <div class="location">
+            <i class=""></i>
+            Cherupuzha, Kannur, Kerala
+        </div>
+
+        <p class="nav-heading">MAIN MENU</p>
+
+        <nav class="main-navigation">
+
+            <a href="index.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-house"></i>
+                </span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="products.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </span>
+                <span>Products & Inventory</span>
+            </a>
+
+            <a href="billing.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </span>
+                <span>Billing</span>
+            </a>
+
+
+            <a href="customers.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-users"></i>
+                </span>
+                <span>Customers</span>
+            </a>
+
+            <a href="suppliers.html"
+               class="nav-link active"
+               aria-current="page">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-truck-field"></i>
+                </span>
+                <span>Suppliers</span>
+            </a>
+
+            <a href="sales.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </span>
+                <span>Sales Register</span>
+            </a>
+
+            <a href="expenses.html" class="nav-link">
+                <span class="nav-icon"><i class="fa-solid fa-truck-field"></i></span>
+                <span>Expenses</span>
+            </a>
+            
+            <a href="reports.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </span>
+                <span>Reports</span>
+            </a>
+        
+            <a href="settings.html" class="nav-link">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-gear"></i>
+                </span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-icon">
+                <i class="fa-solid fa-store"></i>
+            </div>
+
+            <div>
+                <strong>WORLD VISION</strong>
+                <small>Electronics Store</small>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- SHARED PAGE HEADER -->
+        <header class="topbar">
+            <div class="page-heading">
+                <p class="eyebrow">STORE MANAGEMENT</p>
+                <h1>Suppliers</h1>
+                <p class="page-subtitle">
+                    Manage your suppliers and maintain supplier contact records.
+                </p>
+            </div>
+
+            <div class="topbar-right">
+                <div class="topbar-date">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span id="current-date">Loading date...</span>
+                </div>
+
+               <div class="user-avatar">
+    <img src="mylogo.png" alt="WORLD VISION ELECTRONICS">
+</div>
+        </header>
+
+        <div class="suppliers-page">
+
+            <!-- SUMMARY CARDS -->
+            <section class="supplier-summary-grid">
+
+                <div class="supplier-summary-card">
+                    <div class="supplier-summary-icon">
+                        <i class="fa-solid fa-truck-field"></i>
+                    </div>
+
+                    <div class="supplier-summary-info">
+                        <p>Total Suppliers</p>
+                        <h3 id="total-suppliers">0</h3>
+                    </div>
+                </div>
+
+                <div class="supplier-summary-card">
+                    <div class="supplier-summary-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div class="supplier-summary-info">
+                        <p>Active Suppliers</p>
+                        <h3 id="active-suppliers">0</h3>
+                    </div>
+                </div>
+
+                <div class="supplier-summary-card">
+                    <div class="supplier-summary-icon">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                    </div>
+
+                    <div class="supplier-summary-info">
+                        <p>Total Purchase Value</p>
+                        <h3 id="supplier-purchase-value">₹0.00</h3>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ADD / EDIT SUPPLIER FORM -->
+            <section class="supplier-content-card">
+
+                <div class="supplier-card-heading">
+                    <div class="supplier-card-title">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span id="supplier-form-heading">Add New Supplier</span>
+                    </div>
+                </div>
+
+                <form id="supplier-form" autocomplete="off">
+
+                    <input type="hidden" id="supplier-id" name="supplierId">
+
+                    <div class="supplier-form-grid">
+
+                        <div class="supplier-field">
+                            <label for="supplier-name">Supplier / Company Name *</label>
+                            <input
+                                type="text"
+                                id="supplier-name"
+                                name="supplierName"
+                                placeholder="Enter supplier or company name"
+                                required>
+                        </div>
+
+                        <div class="supplier-field">
+                            <label for="supplier-contact-person">Contact Person</label>
+                            <input
+                                type="text"
+                                id="supplier-contact-person"
+                                name="contactPerson"
+                                placeholder="Enter contact person's name">
+                        </div>
+
+                        <div class="supplier-field">
+                            <label for="supplier-phone">Phone Number *</label>
+                            <input
+                                type="tel"
+                                id="supplier-phone"
+                                name="phone"
+                                placeholder="Enter phone number"
+                                autocomplete="tel"
+                                required>
+                        </div>
+
+                        <div class="supplier-field">
+                            <label for="supplier-email">Email Address</label>
+                            <input
+                                type="email"
+                                id="supplier-email"
+                                name="email"
+                                placeholder="Enter email address"
+                                autocomplete="email">
+                        </div>
+
+                        <div class="supplier-field">
+                            <label for="supplier-category">Product Category</label>
+                            <select id="supplier-category" name="category">
+                                <option value="">Select category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Mobile Accessories">Mobile Accessories</option>
+                                <option value="Computer Accessories">Computer Accessories</option>
+                                <option value="Cables and Connectors">Cables and Connectors</option>
+                                <option value="Electrical Items">Electrical Items</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="supplier-field">
+                            <label for="supplier-status">Supplier Status</label>
+                            <select id="supplier-status" name="status">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+
+                        <div class="supplier-field full-width">
+                            <label for="supplier-address">Address</label>
+                            <textarea
+                                id="supplier-address"
+                                name="address"
+                                placeholder="Enter supplier's full address"
+                                rows="3"></textarea>
+                        </div>
+
+                        <div class="supplier-field full-width">
+                            <label for="supplier-notes">Notes</label>
+                            <textarea
+                                id="supplier-notes"
+                                name="notes"
+                                placeholder="Payment terms, delivery details, or other notes"
+                                rows="3"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="supplier-form-actions">
+
+                        <button
+                            type="reset"
+                            class="supplier-btn supplier-btn-secondary"
+                            id="reset-supplier-btn">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            Reset Form
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="supplier-btn supplier-btn-primary"
+                            id="save-supplier-btn">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Save Supplier
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <div class="supplier-help-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>
+                        Add accurate supplier details so that purchases can later
+                        be linked to the correct supplier record.
+                    </span>
+                </div>
+
+            </section>
+
+            <!-- SUPPLIER RECORDS -->
+            <section class="supplier-content-card">
+
+                <div class="supplier-card-heading">
+                    <div class="supplier-card-title">
+                        <i class="fa-solid fa-address-book"></i>
+                        <span>Supplier Records</span>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="supplier-btn supplier-btn-secondary"
+                        id="export-suppliers-btn">
+                        <i class="fa-solid fa-file-export"></i>
+                        Export Records
+                    </button>
+                </div>
+
+                <div class="supplier-toolbar">
+
+                    <div class="supplier-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                            type="search"
+                            id="supplier-search"
+                            placeholder="Search name, phone, email..."
+                            aria-label="Search suppliers">
+                    </div>
+
+                    <div class="supplier-filter">
+                        <label for="supplier-status-filter">Status</label>
+
+                        <select id="supplier-status-filter">
+                            <option value="">All Suppliers</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="supplier-table-wrap">
+
+                    <table class="supplier-table">
+
+                        <thead>
+                            <tr>
+                                <th>Supplier</th>
+                                <th>Phone</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Purchases</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="suppliers-table-body">
+
+                            <tr>
+                                <td colspan="6" class="supplier-empty-state">
+                                    <i class="fa-solid fa-truck-field"></i>
+                                    <strong>No suppliers added yet</strong>
+                                    <span>
+                                        Use the form above to add your first supplier.
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="supplier-table-footer">
+                    <span id="supplier-record-count">0 suppliers</span>
+                    <span>Supplier records for WORLD VISION ELECTRONICS</span>
+                </div>
+
+            </section>
+
+            <footer style="text-align:center; color:#8995a9; font-size:11px; padding:20px 0 10px;">
+                © <span id="footer-year">2026</span>
+                WORLD VISION ELECTRONICS. All rights reserved.
+            </footer>
+
+        </div>
+
+    </main>
+
+    <!--
+        The shared script.js will be added after all 10 HTML pages
+        are completed. Supplier saving, editing, deleting, searching,
+        export, and purchase integration will be connected then.
+    -->
+<script src="suppliers.js"></script>
+</body>
+</html>
